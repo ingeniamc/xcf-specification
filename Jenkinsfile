@@ -15,9 +15,8 @@ pipeline {
         }
         stage('Validate XCF files') {
             steps {
-                sh "$python validate_xcf.py"
+                sh "$python validate_example_files.py"
             }
         }
     }
 }
-
