@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- Enum for access -->
+  <xs:simpleType name="access">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="r"/>
+      <xs:enumeration value="w"/>
+      <xs:enumeration value="rw"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Enum for dtype -->
+  <xs:simpleType name="dtype">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="u8"/>
+      <xs:enumeration value="s8"/>
+      <xs:enumeration value="u16"/>
+      <xs:enumeration value="s16"/>
+      <xs:enumeration value="u32"/>
+      <xs:enumeration value="s32"/>
+      <xs:enumeration value="u64"/>
+      <xs:enumeration value="s64"/>
+      <xs:enumeration value="float"/>
+      <xs:enumeration value="str"/>
+      <xs:enumeration value="bit"/>
+      <xs:enumeration value="byteArray512"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- Register element -->
+  <xs:element name="Register">
+    <xs:complexType>
+      <xs:attribute name="access" type="access" use="required"/>
+      <xs:attribute name="dtype" type="dtype" use="required"/>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="subnode" type="xs:unsignedByte" use="required"/>
+      <xs:attribute name="storage" type="xs:string" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Registers container -->
+  <xs:element name="Registers">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Register" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Device element -->
+  <xs:element name="Device">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Registers"/>
+      </xs:sequence>
+      <xs:attribute name="Interface" type="xs:string" use="required"/>
+      <xs:attribute name="firmwareVersion" type="xs:string" use="required"/>
+      <xs:attribute name="ProductCode" type="xs:int" use="required"/>
+      <xs:attribute name="PartNumber" type="xs:string" use="required"/>
+      <xs:attribute name="RevisionNumber" type="xs:string" use="required"/>
+      <xs:attribute name="NodeID" type="xs:unsignedByte" use="optional"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Header element -->
+  <xs:element name="Header">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Version" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Body element -->
+  <xs:element name="Body">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Device"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Root element -->
+  <xs:element name="IngeniaDictionary">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Header"/>
+        <xs:element ref="Body"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
