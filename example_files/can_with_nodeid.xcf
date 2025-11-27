@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<IngeniaDictionary>
+	<Header>
+		<Version>2.1</Version>
+	</Header>
+	<Body>
+		<Device Interface="CAN" firmwareVersion="0.1.0" ProductCode="741289" PartNumber="EVS-NET-C" RevisionNumber="" NodeID="64">
+			<Registers>
+				<Register access="rw" dtype="u32" id="MOT_BRAKE_FREQ" subnode="1" storage="10000"/>
+			</Registers>
+		</Device>
+	</Body>
+</IngeniaDictionary>
