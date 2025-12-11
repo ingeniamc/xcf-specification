@@ -10,12 +10,17 @@ pipeline {
     stages {
         stage('Install dependencies') {
             steps {
-                sh "$python -m poetry install"
+                sh "$python -m poetry install --with tests"
             }
         }
-        stage('Validate XCF files') {
+        stage('Run tests') {
             steps {
-                sh "$python -m poetry run pytest tests/ -v"
+                sh "$python -m poetry run pytest --junitxml=pytest_reports/junit.xml"
+            }
+            post {
+                always {
+                    junit "pytest_reports/junit.xml"
+                }
             }
         }
     }
