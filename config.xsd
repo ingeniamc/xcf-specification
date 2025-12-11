@@ -57,11 +57,37 @@
     </xs:complexType>
   </xs:element>
 
+  <!-- Table element with local Element -->
+  <xs:element name="Table">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Element" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:attribute name="address" type="xs:unsignedInt" use="required"/>
+            <xs:attribute name="data" type="data" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="id" type="xs:string" use="required"/>
+      <xs:attribute name="subnode" type="xs:unsignedByte" use="required"/>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Tables container -->
+  <xs:element name="Tables">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Table" maxOccurs="unbounded"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
   <!-- Device element -->
   <xs:element name="Device">
     <xs:complexType>
       <xs:sequence>
         <xs:element ref="Registers"/>
+        <xs:element ref="Tables" minOccurs="0"/>
       </xs:sequence>
       <xs:attribute name="Interface" type="xs:string" use="required"/>
       <xs:attribute name="firmwareVersion" type="xs:string" use="required"/>
