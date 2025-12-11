@@ -10,12 +10,12 @@ pipeline {
     stages {
         stage('Install dependencies') {
             steps {
-                sh "$python -m pip install xmlschema==3.2.1"
+                sh "$python -m poetry install"
             }
         }
         stage('Validate XCF files') {
             steps {
-                sh "$python validate_example_files.py"
+                sh "$python -m poetry run pytest tests/ -v"
             }
         }
     }
