@@ -4,7 +4,7 @@ pipeline {
     agent {
         docker {
             label 'worker'
-            image 'ingeniacontainers.azurecr.io/docker-python:1.4'
+            image 'ingeniacontainers.azurecr.io/docker-python:1.6'
         }
     }
     stages {
