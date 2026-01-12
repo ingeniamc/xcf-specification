@@ -1,0 +1,19 @@
+[project]
+name = "xcf_specification"
+version = "0.0.0" # placeholder
+requires-python = ">=3.9"
+
+[tool.poetry]
+package-mode = false
+
+[[tool.poetry.source]]
+name = "ingenia"
+url = "http://pypi.novanta.com/simple"
+priority = "supplemental"
+
+[tool.poetry.group.tests]
+optional = true
+[tool.poetry.group.tests.dependencies]
+xmlschema = "==3.2.1"
+lxml = ">=4.9.0"
+pytest = "==8.4.2"
